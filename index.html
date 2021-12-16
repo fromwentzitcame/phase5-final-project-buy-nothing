@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing File Uploads</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section
+      class="max-w-4xl mt-4 w-11/12 mx-auto bg-blue-50 p-8 shadow-lg rounded-lg"
+    >
+      <h1 class="text-3xl font-semibold text-center">Add a User</h1>
+      <form>
+        <fieldset class="my-2">
+          <label class="w-full block uppercase ml-3 mb-3" for="first_name">
+            First Name
+          </label>
+          <input
+            type="text"
+            name="first_name"
+            id="first_name"
+            class="w-full block p-3 shadow-sm"
+            placeholder="First Name"
+          />
+        </fieldset>
+        <fieldset class="my-2">
+            <label class="w-full block uppercase ml-3 mb-3" for="last_name">
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="last_name"
+              id="last_name"
+              class="w-full block p-3 shadow-sm"
+              placeholder="Last Name"
+            />
+          </fieldset>
+        <fieldset class="my-2">
+          <label class="w-full block uppercase ml-3 mb-3" for="email">
+            Email
+          </label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="w-full block p-3 shadow-sm"
+          />
+        </fieldset>
+        <fieldset class="my-2">
+          <label class="w-full block uppercase ml-3 mb-3" for="zip_code">
+            Zip Code
+          </label>
+          <input
+            type="number"
+            name="zip_code"
+            id="zip_code"
+            class="w-full block p-3 shadow-sm"
+          />
+        </fieldset>
+        <fieldset class="my-2">
+          <label class="w-full block uppercase ml-3 mb-0" for="profile_picture">
+            Profile Picture
+          </label>
+          <input
+            type="file"
+            name="profile_picture"
+            id="profile_picture"
+            class="w-full block p-3"
+            placeholder="Profile Picture"
+          />
+        </fieldset>
+        <button
+          class="w-full block p-3 bg-green-400 hover:bg-green-500 text-center transition duration-200"
+          type="submit"
+        >
+          Create User
+        </button>
+      </form>
+    </section>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+          document.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const form = e.target
+            const formData = new FormData()
+            formData.append('user[first_name]', form.first_name.value)
+            formData.append('user[last_name]', form.last_name.value)
+            formData.append('user[email]', form.email.value)
+            formData.append('user[zip_code]', form.zip_code.value)
+            formData.append('user[profile_picture]', form.profile_picture.files[0], form.profile_picture.value)
+            fetch('http://localhost:3000/users', {
+                method: 'post',
+                body: formData,
+            })
+            .then((res) => res.json())
+            .then((user) => {
+              console.log(user)
+              const userDiv = document.createElement('div')
+              userDiv.className = 'shadow bg-green-50 p-3'
+              userDiv.innerHTML = `
+              <h1 class="user_first_name text-2xl"></h1>
+              <img class="user_profile_picture w-full block" />  
+              <p class="email"></p> 
+              <p class="zip_code"></p> 
+              `
+              userDiv.querySelector('.user_first_name').textContent = user.name
+              userDiv.querySelector('.user_profile_picture').src = user.profile_picture_url
+              userDiv.querySelector('.email').textContent = user.email
+              userDiv.querySelector('.zip_code').textContent = user.zip_code
+
+              container.appendChild(userDiv)
+            })
+          })
+        })
+      </script>
+  </body>
+</html>
