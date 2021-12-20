@@ -9,6 +9,15 @@ function Toolbar() {
                 <NavLink className='links' to='/'>
                    <span>home</span>
                </NavLink>
+               <NavLink className='links' to='/'>
+                   <span>profile</span>
+               </NavLink>
+               <NavLink className='links' to='/'>
+                   <span>watchlist</span>
+               </NavLink>
+               <NavLink className='links' to='/'>
+                   <span>resources</span>
+               </NavLink>
             </NavMenu>
         </Nav>
     )
@@ -23,27 +32,30 @@ const Nav = styled.nav`
     bottom: 0;
     left: 0;
     margin-top: 60px;
+    border-color: #888888;
+    border-style: none solid none none;
+    border-width: 2px;
     background-color: #baccba;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 0 50px;
+    padding: 0 50px 0 40px;
     letter-spacing: 16;
     z-index: -1
 `;
 
 const NavMenu = styled.div`
   display: flex;
+  flex-direction: column;
   height: 100%;
-  justify-content: flex-end;
+  justify-content: flex-start;
   position: relative;
+  line-height: 2;
   padding-top: 20px;
   a {
     display: flex;
     text-decoration: none;
     transition: all 200ms ease-out;
     span {
-      color: #000000;
+      color: #222222;
       font-size: 14px;
       letter-spacing: 1.42px;
     }

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   resources :posts
   resources :users, only: [:index, :show, :update, :destroy]
   resources :neighborhoods, only: [:index, :show]

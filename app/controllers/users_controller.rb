@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:update, :destroy]
+  skip_before_action :authorize, only: [:create]
 
   # GET /users
   def index
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
     user = User.find_by!(id: params[:id])
     render json: user, status: :ok
   end
+
   # GET /users/1
   def show_my_profile
     if current_user

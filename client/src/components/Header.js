@@ -21,9 +21,13 @@ function Header({setLoggedIn, user}) {
 
     return (
         <Nav>
-            <span>the buy nothing project</span>
-            <Welcome>{user ? `HELLO, ${user.username.toUpperCase()}!` : null }</Welcome>
-            { !user ? <Login onClick={() => {navigate('/login')}}>login</Login> : <Logout onClick={() => handleLogout()}>logout</Logout>}
+            <NavLink className='links' to='/'>
+                <span>the buy nothing project</span>
+            </NavLink>
+            <div>
+                <Welcome>{user ? `hello, ${user.first_name.toLowerCase()}!` : null }</Welcome>
+                { !user ? <LogButton onClick={() => {navigate('/login')}}>login</LogButton> : <LogButton onClick={() => handleLogout()}>logout</LogButton>}
+            </div>
         </Nav>
     )
 }
@@ -31,11 +35,13 @@ function Header({setLoggedIn, user}) {
 export default Header
 
 const Nav = styled.nav`
+    color: #222222;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
+    border-color: #888888;
     border-style: none none solid none;
     border-width: 2px;
     background-color: #baccba;
@@ -45,92 +51,31 @@ const Nav = styled.nav`
     padding: 0 25px;
     letter-spacing: 16;
     z-index: 3;
+    a {
+        color: #222222;
+        text-decoration: none;
+    }
 `;
 
-const NavMenu = styled.div`
-  align-items: center;
-  display: flex;
-  flex-flow: row nowrap;
-  height: 100%;
-  justify-content: flex-end;
-  position: relative;
-  margin-right: 25px;
-  margin-left: auto;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    img {
-      height: 20px;
-      min-width: 20px;
-      width: 20px;
-      z-index: auto;
-    }
-    span {
-      color: rgb(249, 249, 249);
-      font-size: 13px;
-      letter-spacing: 1.42px;
-      line-height: 1.08;
-      padding: 2px 0px;
-      white-space: nowrap;
-      position: relative;
-      &:before {
-        background-color: rgb(249, 249, 249);
-        border-radius: 0px 0px 4px 4px;
-        bottom: -6px;
-        content: "";
-        height: 2px;
-        left: 0px;
-        opacity: 0;
-        position: absolute;
-        right: 0px;
-        width: auto;
-      }
-    }
+const LogButton = styled.a`
+    color: #222222;
+    background-color: white;
+    padding: 8px 16px;
+    letter-spacing: 1.5px;
+    border: 1px solid #f9f9f9;
+    border-radius: 6px;
+    transition: all 0.2s ease 0s;
     &:hover {
-      span:before {
-        transform: scaleX(1);
-        visibility: visible;
-        opacity: 1 !important;
-      }
+        cursor: pointer;
+        background: #DDDDDD;
+        color: #000;
+        border-color: white;
     }
-  }
-`
-
-const Login = styled.a`
-  background-color: white;
-  padding: 8px 16px;
-  letter-spacing: 1.5px;
-  border: 1px solid #f9f9f9;
-  border-radius: 4px;
-  transition: all 0.2s ease 0s;
-  &:hover {
-    cursor: pointer;
-    background: #febd97;
-    color: #000;
-    border-color: white;
-  }
-`;
-
-const Logout = styled.a`
-  background-color: white;
-  padding: 8px 16px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border: 1px solid #f9f9f9;
-  border-radius: 4px;
-  transition: all 0.2s ease 0s;
-  &:hover {
-    cursor: pointer;
-    background: #febd97;
-    color: #000;
-    border-color: white;
-  }
 `;
 
 const Welcome = styled.span`
-    color: rgb(249, 249, 249);
-    font-size: 13px;
+    color: #222222;
+    font-size: 14px;
     letter-spacing: 1.42px;
     line-height: 1.08;
     padding: 0px 10px;
