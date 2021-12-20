@@ -49,7 +49,7 @@ const NavMenu = styled.div`
   justify-content: flex-start;
   position: relative;
   line-height: 2;
-  padding-top: 20px;
+  padding-top: 30px;
   a {
     display: flex;
     text-decoration: none;

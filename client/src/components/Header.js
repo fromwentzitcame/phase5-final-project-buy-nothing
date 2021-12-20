@@ -13,7 +13,7 @@ function Header({setLoggedIn, user}) {
         fetch("/logout", { method: "DELETE" })
         .then((response) => {
           if (response.ok) {
-            navigate('/login')
+            navigate('/')
             setLoggedIn(null);
           }
         });
@@ -24,10 +24,11 @@ function Header({setLoggedIn, user}) {
             <NavLink className='links' to='/'>
                 <span>the buy nothing project</span>
             </NavLink>
-            <div>
+            <UserCenter>
                 <Welcome>{user ? `hello, ${user.first_name.toLowerCase()}!` : null }</Welcome>
+                {user? <IconPic src={user.profile_picture_url}></IconPic> : null}
                 { !user ? <LogButton onClick={() => {navigate('/login')}}>login</LogButton> : <LogButton onClick={() => handleLogout()}>logout</LogButton>}
-            </div>
+            </UserCenter>
         </Nav>
     )
 }
@@ -48,7 +49,7 @@ const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
+    padding: 5px 25px;
     letter-spacing: 16;
     z-index: 3;
     a {
@@ -56,6 +57,11 @@ const Nav = styled.nav`
         text-decoration: none;
     }
 `;
+
+const UserCenter = styled.div`
+    display: flex;
+    align-items: center;
+`
 
 const LogButton = styled.a`
     color: #222222;
@@ -80,5 +86,14 @@ const Welcome = styled.span`
     line-height: 1.08;
     padding: 0px 10px;
     white-space: nowrap;
+    position: relative;
+`
+
+const IconPic = styled.img`
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50px;
+    margin-right: 15px;
     position: relative;
 `

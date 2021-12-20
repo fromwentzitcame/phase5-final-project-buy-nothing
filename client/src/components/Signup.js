@@ -32,19 +32,17 @@ function Signup({onLogin}) {
         e.preventDefault();
         setErrors([])
         setIsLoading(true);
+        const form = e.target
         const formData = new FormData();
-        formData.append('first_name', signupForm.first_name);
-        formData.append('last_name', signupForm.last_name);
-        formData.append('email', signupForm.email);
-        formData.append('password', signupForm.password);
-        formData.append('zip_code', signupForm.zip_code);
-        formData.append('profile_picture', signupForm.profile_picture);
+        formData.append('first_name', form.first_name.value);
+        formData.append('last_name', form.last_name.value);
+        formData.append('email', form.email.value);
+        formData.append('password', form.password.value);
+        formData.append('zip_code', form.zip_code.value);
+        formData.append('profile_picture', form.profile_picture.files[0], form.profile_picture.value);
   
         fetch("/signup", {
             method: "POST",
-            headers: {
-                "Content-Type" : "application/json",
-            },
             body: formData,
         })
         .then(response => {
