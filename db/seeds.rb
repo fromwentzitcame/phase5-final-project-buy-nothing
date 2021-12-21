@@ -23,10 +23,6 @@ highland_park = Neighborhood.create(name: "Highland Park", city: "Grand Rapids",
 john_ball = Neighborhood.create(name: "John Ball Park", city: "Grand Rapids", state: "Michigan")
 midtown = Neighborhood.create(name: "Midtown", city: "Grand Rapids", state: "Michigan")
 roosevelt_park = Neighborhood.create(name: "Roosevelt Park", city: "Grand Rapids", state: "Michigan")
-south_west = Neighborhood.create(name: "South West End", city: "Grand Rapids", state: "Michigan")
-south_east = Neighborhood.create(name: "South East End", city: "Grand Rapids", state: "Michigan")
-north_west = Neighborhood.create(name: "North West End", city: "Grand Rapids", state: "Michigan")
-north_east = Neighborhood.create(name: "North East End", city: "Grand Rapids", state: "Michigan")
 
 puts "Seeding post categories..."
 gift = Category.create(type: "gift")
@@ -74,7 +70,6 @@ nadia = User.create(first_name: "Nadia", last_name: "Nandini", email: "nadia@fak
 nadia.profile_picture.attach(io: File.open('/app/assets/images/nadia-nandini.jpg'), filename: 'nadia-nandini.jpg', content_type: 'image/jpeg')
 nahome = User.create(first_name: "Nahome", last_name: "Tadesse", email: "nahome@fakemail.com", password: "nahome", neighborhood_id: roosevelt_park.id)
 nahome.profile_picture.attach(io: File.open('/app/assets/images/nahome-tadesse.jpg'), filename: 'nahome-tadesse.jpg', content_type: 'image/jpeg')
-
 olenka = User.create(first_name: "Olenka", last_name: "Sergienko", email: "olenka@fakemail.com", password: "olenka", neighborhood_id: belknap_lookout.id)
 olenka.profile_picture.attach(io: File.open('/app/assets/images/olenka-sergienko.jpg'), filename: 'olenka-sergienko.jpg', content_type: 'image/jpeg')
 oliver = User.create(first_name: "Oliver", last_name: "North", email: "oliver@fakemail.com", password: "oliver", neighborhood_id: east_hills.id)
@@ -98,12 +93,26 @@ victor.profile_picture.attach(io: File.open('/app/assets/images/victor-amusan.jp
 victoria = User.create(first_name: "Victoria", last_name: "Santos", email: "victoria@fakemail.com", password: "victoria", neighborhood_id: midtown.id)
 victoria.profile_picture.attach(io: File.open('/app/assets/images/victoria-santos.jpg'), filename: 'victoria-santos.jpg', content_type: 'image/jpeg')
 
-
 puts "Seeding posts..."
-
+p1 = Post.create(text: "Food processor, in great condition! Will let simmer.", likes: 0, fulfilled: false, category_id: gift.id, user_id: alona.id)
+p1.picture.attach(io: File.open('/app/assets/postimages/food_processor.jpeg'), filename: 'food_processor.jpeg', content_type: 'image/jpeg')
+p2 = Post.create(text: "Anyone need some storage shelves?", likes: 2, fulfilled: true, category_id: gift.id, user_id: amir.id)
+p3 = Post.create(text: "We have more kale from our garden than we could possibly eat, there's enough for a few people!", likes: 1, fulfilled: false, category_id: gift.id, user_id: josh.id)
+p4 = Post.create(text: "Various (opened) dry goods that I won't eat, come take your pick!", likes: 2, fulfilled: false, category_id: gift.id, user_id: ibrahim.id)
+p5 = Post.create(text: "Come get some fresh cut lavender! We have far too much for ourselves.", likes: 4, fulfilled: false, category_id: gift.id, user_id: paige.id)
+p6 = Post.create(text: "Doing some spring cleaning, see pictures attached.", likes: 0, fulfilled: false, category_id: gift.id, user_id: olivia.id)
+p7 = Post.create(text: "We've got some clothes our daughter outgrew - anyone looking for new-to-you toddler clothes?", likes: 1, fulfilled: true, category_id: gift.id, user_id: kurt.id)
+p8 = Post.create(text: "", likes: 1, fulfilled: false, category_id: ask.id, user_id: roxanne.id)
+p9 = Post.create(text: "", likes: 0, fulfilled: false, category_id: ask.id, user_id: anna.id)
+p10 = Post.create(text: "", likes: 1, fulfilled: false, category_id: ask.id, user_id: farrah.id)
+p11 = Post.create(text: "", likes: 0, fulfilled: false, category_id: ask.id, user_id: andrea.id)
+p12 = Post.create(text: "", likes: 2, fulfilled: false, category_id: ask.id, user_id: thyrone.id)
+p13 = Post.create(text: "", likes: 4, fulfilled: false, category_id: gratitude.id, user_id: olenka.id)
+p14 = Post.create(text: "", likes: 3, fulfilled: false, category_id: gratitude.id, user_id: daniel.id)
+p15 = Post.create(text: "", likes: 6, fulfilled: false, category_id: gratitude.id, user_id: lauren.id)
 
 puts "Seeding comments..."
-
+c1 = Comment.create(text: "", likes: 0)
 
 puts "Seeding subcomments/replies..."
 
