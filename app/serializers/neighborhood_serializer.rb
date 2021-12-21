@@ -1,3 +1,3 @@
 class NeighborhoodSerializer < ActiveModel::Serializer
-  attributes :id, :name, :city, :state, :zip_code
+  attributes :id, :name, :city, :state
 end

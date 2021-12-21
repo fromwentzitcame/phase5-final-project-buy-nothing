@@ -22,7 +22,7 @@ function Header({setLoggedIn, user}) {
     return (
         <Nav>
             <NavLink className='links' to='/'>
-                <span>the buy nothing project</span>
+                <span>the buy nothing project: grand rapids</span>
             </NavLink>
             <UserCenter>
                 <Welcome>{user ? `hello, ${user.first_name.toLowerCase()}!` : null }</Welcome>

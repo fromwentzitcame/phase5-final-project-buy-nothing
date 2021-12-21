@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
+  resources :subcomments
+  resources :comments
   resources :posts
   resources :users, only: [:index, :show, :update, :destroy]
-  resources :neighborhoods, only: [:index, :show]
+  resources :neighborhoods, only: [:index]
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

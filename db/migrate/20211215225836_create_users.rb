@@ -5,8 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :last_name
       t.string :email
       t.string :password_digest
-      t.integer :zip_code
-      t.belongs_to :neighborhood
+      t.belongs_to :neighborhood, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -1,6 +1,10 @@
 class User < ApplicationRecord
     has_secure_password
+    
     has_many :posts
+    has_many :comments
+    has_many :subcomments
+    belongs_to :neighborhood
 
     has_one_attached :profile_picture
     # has_many_attached :pictures, through: :posts
