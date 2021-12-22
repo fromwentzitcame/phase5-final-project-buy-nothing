@@ -4,8 +4,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :text
       t.integer :likes, default: 0
       t.boolean :fulfilled, default: false
-      t.belongs_to :category, null: false, foreign_key: true
-      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :category
+      t.belongs_to :user
 
       t.timestamps
     end
