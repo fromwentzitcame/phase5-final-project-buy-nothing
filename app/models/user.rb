@@ -17,5 +17,8 @@ class User < ApplicationRecord
     def neighborhood_name
         self.neighborhood.name
     end
+    def full_name
+        "#{self.first_name} #{self.last_name}"
+    end
 
 end

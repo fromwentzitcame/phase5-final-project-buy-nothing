@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function LandingPage({user}) {
+function LandingPage() {
     return (
         <>
             <WelcomeDisplay>

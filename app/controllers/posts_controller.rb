@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :set_post, only: [:show, :update, :destroy]
+    skip_before_action :authorize
 
     # GET /posts
     def index
@@ -8,7 +9,7 @@ class PostsController < ApplicationController
   
     # GET /posts/1
     def show
-      render json: @post
+      render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
     end
   
     # POST /posts
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_post
-        @post = post.find_by!(id: params[:id])
+        @post = Post.find_by!(id: params[:id])
       end
   
       # Only allow a list of trusted parameters through.

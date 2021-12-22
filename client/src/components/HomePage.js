@@ -1,11 +1,18 @@
-import React from 'react'
-import Toolbar from './Toolbar'
+import React, { useState, useEffect } from 'react'
 import PostContainer from './PostContainer'
 
-function HomePage() {
+function HomePage({user}) {
+    const [posts, setPosts] = useState(null)
+
+    useEffect(() => {
+        fetch('/posts')
+            .then(resp => resp.json())
+            .then(data => setPosts(null))
+    })
+
+
     return (
         <div>
-            <Toolbar/>
             <PostContainer/>
         </div>
     )

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:update, :destroy]
-  # skip_before_action :authorize, only: [:create]
+  skip_before_action :authorize, only: [:create]
 
   # GET /users
   def index
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by!(id: params[:id])
-    render json: user, status: :ok
+    render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes], status: :ok
   end
 
   # GET /users/1
