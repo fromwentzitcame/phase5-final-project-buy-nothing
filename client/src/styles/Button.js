@@ -1,50 +1,21 @@
 import styled from "styled-components";
 
-const COLORS = {
-  primary: {
-    "--main": "#4f2004",
-    "--accent": "white",
-  }
-};
-
-function Button({ variant = "fill", color = "primary", ...props }) {
-  let Component;
-  if (variant === "fill") {
-    Component = FillButton;
-  } else if (variant === "outline") {
-    Component = OutlineButton;
-  }
-
-  return <Component style={COLORS[color]} {...props} />;
-}
-
-const ButtonBase = styled.button`
-  cursor: pointer;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  padding: 8px 16px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const FillButton = styled(ButtonBase)`
-  background-color: var(--main);
-  color: var(--accent);
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-const OutlineButton = styled(ButtonBase)`
-  background-color: white;
-  color: var(--main);
-  border: 2px solid var(--main);
-  &:hover {
-    background: hsl(235deg 85% 97%);
-  }
-`;
+const Button = styled.button`
+    color: #222;
+    font-size: 20px;
+    background-color: #b9b9cb;
+    padding: 8px 16px;
+    letter-spacing: 1.5px;
+    border: 1px solid #888888;
+    border-radius: 6px;
+    transition: all 0.2s ease 0s;
+    &:hover {
+        cursor: pointer;
+        background-color: #baccba;
+        color: #222;
+        box-shadow: 0 6px 10px 0 rgba(0,0,0,0.24), 0 16px 36px 0 rgba(0,0,0,0.19);
+        /* border-color: #888888; */
+    }
+`
 
 export default Button;

@@ -22,7 +22,7 @@ function Header({setLoggedIn, user}) {
     return (
         <Nav>
             <NavLink className='links' to='/'>
-                <span>the buy nothing project: grand rapids</span>
+                <span>buy nothing grand rapids</span>
             </NavLink>
             <UserCenter>
                 <Welcome>{user ? `hello, ${user.first_name.toLowerCase()}!` : null }</Welcome>
@@ -65,17 +65,17 @@ const UserCenter = styled.div`
 
 const LogButton = styled.a`
     color: #222222;
-    background-color: white;
+    background-color: #b9b9cb;
     padding: 8px 16px;
     letter-spacing: 1.5px;
-    border: 1px solid #f9f9f9;
+    border: 1px solid #888888;
     border-radius: 6px;
     transition: all 0.2s ease 0s;
     &:hover {
         cursor: pointer;
-        background: #DDDDDD;
+        background-color: #99b399;
         color: #000;
-        border-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.24), 0 12px 24px 0 rgba(0,0,0,0.19);
     }
 `;
 

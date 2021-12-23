@@ -15,4 +15,16 @@ class Post < ApplicationRecord
       self.category.category_name
   end
 
+  def user_name
+      self.user.full_name
+  end
+
+  def user_picture
+      self.user.profile_picture_url
+  end
+
+  def comments
+      self.comments
+  end
+
 end

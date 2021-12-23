@@ -31,15 +31,15 @@ const Nav = styled.nav`
     top: 0;
     bottom: 0;
     left: 0;
-    margin-top: 60px;
+    margin-top: 70px;
     border-color: #888888;
     border-style: none solid none none;
     border-width: 2px;
     background-color: #baccba;
     display: flex;
-    padding: 0 50px 0 40px;
+    padding: 0 30px 0 30px;
     letter-spacing: 16;
-    z-index: -1
+    z-index: 2
 `;
 
 const NavMenu = styled.div`

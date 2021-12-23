@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Header setLoggedIn={setUser} user={user} />
-      { user? <Toolbar /> : null }
+      {/* { user? <Toolbar /> : null } */}
       <Routes>
         <Route exact path='/' element={ user === null? <LandingPage /> : <HomePage user={user}/> } />
         <Route exact path='/login' element={ user === null ? <Login onLogin={setUser} /> : null } />
