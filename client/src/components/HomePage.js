@@ -7,6 +7,8 @@ import styled from 'styled-components'
 
 function HomePage({user}) {
     const [posts, setPosts] = useState([])
+    const [comments, setComments] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         fetch('/posts')
@@ -19,7 +21,31 @@ function HomePage({user}) {
             .then(data => {
                 setPosts(data)
                 console.log(data)
-            })  ;
+            });
+
+            fetch('/comments')
+            .then(resp => {
+                if(resp.ok) {
+                    console.log(resp)
+                    return resp.json()         
+                } else {console.log("something went wrong")}
+            })
+            .then(data => {
+                setComments(data)
+                console.log(data)
+            });
+
+            fetch('/users')
+            .then(resp => {
+                if(resp.ok) {
+                    console.log(resp)
+                    return resp.json()         
+                } else {console.log("something went wrong")}
+            })
+            .then(data => {
+                setUsers(data)
+                console.log(data)
+            })
         }, []);
 
 
@@ -30,7 +56,7 @@ function HomePage({user}) {
             </div>
             <PostFeed>
                 <h2>Community Posts</h2>
-                <PostContainer posts={posts}/>
+                <PostContainer posts={posts} comments={comments} currentUser={user}/>
             </PostFeed>
         </div>
     )
