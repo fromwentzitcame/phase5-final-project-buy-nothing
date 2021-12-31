@@ -1,12 +1,41 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+
 import Reply from './Reply'
 
 import { PostButton } from "../styles";
+import styled from 'styled-components'
+import swal from 'sweetalert';
 
-function Comment({currentUser, commentData, commentData:{user, subcomments}}) {
+function Comment({currentUser, deleteComment, commentData, commentData:{user, subcomments}}) {
+    let navigate = useNavigate()
 
     let displayReplies = subcomments.map( reply => <Reply key={reply.id} replyData={reply} currentUser={currentUser} /> )
+
+    function handleDelete(commentData) {
+        swal({
+            title: "caution",
+            text: "once deleted, you will not be able to recover this comment.",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`/comments/${commentData.id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(data => {
+                        console.log(data)
+                    })
+                    swal("you have successfully deleted your comment.")
+                    deleteComment(commentData)
+                    navigate('/')
+                } else {
+                    swal("you did not delete your comment.")
+                }
+            })
+
+    }
 
     return (
         <CommentDiv>
@@ -18,7 +47,7 @@ function Comment({currentUser, commentData, commentData:{user, subcomments}}) {
             <p>{commentData.likes} likes</p>
             <PostButton>like</PostButton>
             <PostButton>reply</PostButton>
-            {commentData.user.id === currentUser.id ? <PostButton>delete</PostButton> : null }
+            {commentData.user.id === currentUser.id ? <PostButton onClick={() => handleDelete(commentData)}>delete</PostButton> : null }
             {displayReplies}
         </CommentDiv>
     )

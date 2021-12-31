@@ -74,8 +74,8 @@ function CreatePost({currentUser}) {
             <form className="form" onSubmit={handleSubmit}>
             <UsernameField>
                 <Label htmlFor="text">text</Label>
-                <Input
-                type="text"
+                <textarea
+                type="textarea"
                 name="text"
                 id="text"
                 autoComplete="off"

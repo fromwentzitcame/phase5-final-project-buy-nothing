@@ -1,14 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Comment from './Comment'
+import CreateComment from './CreateComment'
 
 import styled from 'styled-components'
+import swal from 'sweetalert'
 
 import { PostButton } from "../styles";
+import { useNavigate } from 'react-router-dom'
 
-function Post({currentUser, postData, comments}) {
+function Post({currentUser, postData, comments, allComments, setComments, deletePost, deleteComment}) {
+    let navigate = useNavigate()
+    const [showCommentForm, setShowCommentForm] = useState(false)
 
-    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} currentUser={currentUser}/>)
+    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} currentUser={currentUser} deleteComment={deleteComment}/>)
     let displayPictures = postData.picture_urls.map(picture => <img key={picture} src={picture} alt="broken image"></img>)
+
+    function handleCommentFormDisplay() {
+        setShowCommentForm(showCommentForm => !showCommentForm)
+    }
+
+    function handleDelete(postData) {
+        swal({
+            title: "caution",
+            text: "once deleted, you will not be able to recover this post.",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`/posts/${postData.id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(data => console.log(data))
+                    swal("you have successfully deleted this post.")
+                    deletePost(postData)
+                    navigate('/')
+                } else {
+                    swal("you did not delete this post.")
+                }
+            })
+
+    }
+
 
     return (
         <PostCard>
@@ -26,8 +59,9 @@ function Post({currentUser, postData, comments}) {
             <div>
                 <p>{postData.likes} likes</p>
                 <PostButton>like</PostButton>
-                <PostButton>comment</PostButton>
-                {postData.user_id === currentUser.id ? <PostButton>delete</PostButton> : null }
+                <PostButton onClick={() => handleCommentFormDisplay()}>comment</PostButton>
+                {postData.user_id === currentUser.id ? <PostButton onClick={() => handleDelete(postData)}>delete</PostButton> : null }
+                { showCommentForm === true ? <CreateComment currentUser={currentUser} setComments={setComments} allComments={allComments} postId={postData.id} handleClick={handleCommentFormDisplay}/> : null }
                 <p>comments</p>
                 {displayComments}
             </div>

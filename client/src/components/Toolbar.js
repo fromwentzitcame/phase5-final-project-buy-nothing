@@ -12,10 +12,10 @@ function Toolbar() {
                <NavLink className='links' to='/createpost'>
                    <span>create post</span>
                </NavLink>
-               <NavLink className='links' to='/'>
+               <NavLink className='links' to='/profile'>
                    <span>profile</span>
                </NavLink>
-               <NavLink className='links' to='/'>
+               <NavLink className='links' to='/resources'>
                    <span>resources</span>
                </NavLink>
             </NavMenu>

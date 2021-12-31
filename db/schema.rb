@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_174203) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
-    t.integer "likes"
+    t.integer "likes", default: 0
     t.bigint "user_id"
     t.bigint "post_id"
     t.datetime "created_at", precision: 6, null: false
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_12_21_174203) do
 
   create_table "subcomments", force: :cascade do |t|
     t.text "text"
-    t.integer "likes"
+    t.integer "likes", default: 0
     t.bigint "user_id"
     t.bigint "comment_id"
     t.datetime "created_at", precision: 6, null: false

@@ -1,16 +1,58 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import styled from 'styled-components'
 
-function PostContainer({currentUser, posts, comments}) {
+function PostContainer({currentUser}) {
+    const [posts, setPosts] = useState([])
+    const [comments, setComments] = useState([])
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        fetch('/posts')
+            .then(resp => {
+                if(resp.ok) {
+                    console.log(resp)
+                    return resp.json()         
+                } else {console.log("something went wrong")}
+            })
+            .then(data => {
+                setPosts(data)
+                console.log(data)
+            });
+
+            fetch('/comments')
+            .then(resp => {
+                if(resp.ok) {
+                    console.log(resp)
+                    return resp.json()         
+                } else {console.log("something went wrong")}
+            })
+            .then(data => {
+                setComments(data)
+                console.log(data)
+            });
+        }, []);
+
 
     function attachComments(postObj, commentsArr) {
         let postComments = commentsArr.filter(comment => comment.post_id === postObj.id)
         return postComments
     }
 
+    function deletePost(clickedPost) {
+        let displayedPosts = [...posts]
+        const updatedPosts = displayedPosts.filter(post => post.id !== clickedPost.id)
+        setPosts(updatedPosts)
+    }
 
-    let feed = posts ? posts.map( post => <Post key={post.id} postData={post} currentUser={currentUser} comments={attachComments(post, comments)} /> ) : null 
+    function deleteComment(clickedComment) {
+        let displayedComments = [...comments]
+        const updatedComments = displayedComments.filter(comment => comment.id !== clickedComment.id)
+        setComments(updatedComments)
+    }
+
+    let revPosts = [...posts]
+    let feed = posts ? revPosts.reverse().map( post => <Post key={post.id} postData={post} currentUser={currentUser} comments={attachComments(post, comments)} allComments={comments} setComments={setComments} deletePost={deletePost} deleteComment={deleteComment}/> ) : null 
 
     return (
         <>
