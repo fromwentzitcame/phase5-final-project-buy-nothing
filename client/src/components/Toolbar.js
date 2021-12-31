@@ -9,11 +9,11 @@ function Toolbar() {
                 <NavLink className='links' to='/'>
                    <span>home</span>
                </NavLink>
-               <NavLink className='links' to='/'>
-                   <span>profile</span>
+               <NavLink className='links' to='/createpost'>
+                   <span>create post</span>
                </NavLink>
                <NavLink className='links' to='/'>
-                   <span>watchlist</span>
+                   <span>profile</span>
                </NavLink>
                <NavLink className='links' to='/'>
                    <span>resources</span>

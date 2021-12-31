@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import HomePage from './components/HomePage';
 import Toolbar from './components/Toolbar';
+import CreatePost from './components/CreatePost';
 
 import {Routes, Route} from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -36,6 +37,7 @@ function App() {
         <Route exact path='/login' element={ user === null ? <Login onLogin={setUser} /> : null } />
         <Route exact path='/signup' element={ user === null ? <Signup onLogin={setUser} /> : null } />
         <Route exact path='/profile' element={ user ? <Profile user={user} resetUser={setUser} /> : null } />
+        <Route exact path='/createpost' element={ user ? <CreatePost currentUser={user} /> : null } />
       </Routes>
     </div>
   );

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Reply from './Reply'
 
+import { PostButton } from "../styles";
+
 function Comment({currentUser, commentData, commentData:{user, subcomments}}) {
 
     let displayReplies = subcomments.map( reply => <Reply key={reply.id} replyData={reply} currentUser={currentUser} /> )
@@ -14,9 +16,9 @@ function Comment({currentUser, commentData, commentData:{user, subcomments}}) {
             </UserInfo>
             <p>{commentData.text}</p>
             <p>{commentData.likes} likes</p>
-            <button>like</button>
-            <button>reply</button>
-            {commentData.user.id === currentUser.id ? <button>delete</button> : null }
+            <PostButton>like</PostButton>
+            <PostButton>reply</PostButton>
+            {commentData.user.id === currentUser.id ? <PostButton>delete</PostButton> : null }
             {displayReplies}
         </CommentDiv>
     )

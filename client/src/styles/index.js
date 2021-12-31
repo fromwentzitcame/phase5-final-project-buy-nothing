@@ -3,5 +3,6 @@ import FormField from "./FormField";
 import Input from "./Input";
 import Label from "./Label";
 import UsernameField from "./UsernameField";
+import PostButton from "./PostButton";
 
-export { Button, FormField, Input, Label, UsernameField };
+export { Button, PostButton, FormField, Input, Label, UsernameField };

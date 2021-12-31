@@ -68,7 +68,6 @@ function Signup({onLogin}) {
                 name="first_name"
                 id="first_name"
                 autoComplete="off"
-                // value={firstName}
                 onChange={handleChange}
                 />
             </UsernameField>
@@ -78,7 +77,6 @@ function Signup({onLogin}) {
                 type="text"
                 name="last_name"
                 id="last_name"
-                // value={lastName}
                 onChange={handleChange}
                 />
             </FormField>
@@ -88,7 +86,6 @@ function Signup({onLogin}) {
                 type="text"
                 namme="email"
                 id="email"
-                // value={email}
                 onChange={handleChange}
                 />
             </FormField>
@@ -98,7 +95,6 @@ function Signup({onLogin}) {
                 type="number"
                 name="zip_code"
                 id="zip_code"
-                // value={zipCode}
                 onChange={handleChange}
                 />
             </FormField>
@@ -109,7 +105,6 @@ function Signup({onLogin}) {
                 name="password"
                 id="password"
                 autoComplete="current-password"
-                // value={password}
                 onChange={handleChange}
                 />
             </FormField>

@@ -3,6 +3,8 @@ import Comment from './Comment'
 
 import styled from 'styled-components'
 
+import { PostButton } from "../styles";
+
 function Post({currentUser, postData, comments}) {
 
     let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} currentUser={currentUser}/>)
@@ -23,9 +25,9 @@ function Post({currentUser, postData, comments}) {
             }
             <div>
                 <p>{postData.likes} likes</p>
-                <button>like</button>
-                <button>comment</button>
-                {postData.user_id === currentUser.id ? <button>delete</button> : null }
+                <PostButton>like</PostButton>
+                <PostButton>comment</PostButton>
+                {postData.user_id === currentUser.id ? <PostButton>delete</PostButton> : null }
                 <p>comments</p>
                 {displayComments}
             </div>

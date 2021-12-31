@@ -73,7 +73,7 @@ const LogButton = styled.a`
     transition: all 0.2s ease 0s;
     &:hover {
         cursor: pointer;
-        background-color: #99b399;
+        background-color: #CBB9B9;
         color: #000;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.24), 0 12px 24px 0 rgba(0,0,0,0.19);
     }

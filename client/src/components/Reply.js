@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { PostButton } from "../styles";
+
 function Reply({replyData, currentUser}) {
     return (
         <ReplyDiv>
@@ -10,8 +12,8 @@ function Reply({replyData, currentUser}) {
             </UserInfo>
             <p>{replyData.text}</p>
             <p>{replyData.likes} likes</p>
-            <button>like</button>
-            {replyData.user_id === currentUser.id ? <button>delete</button> : null }
+            <PostButton>like</PostButton>
+            {replyData.user_id === currentUser.id ? <PostButton>delete</PostButton> : null }
         </ReplyDiv>
     )
 }

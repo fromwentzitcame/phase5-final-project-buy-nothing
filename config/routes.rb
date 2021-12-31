@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :neighborhoods, only: [:index]
   resources :categories, only: [:index]
   resources :users, only: [:index, :show, :update, :destroy]
-  resources :posts
+  resources :posts, only: [:index, :show, :update, :destroy]
   resources :comments
   resources :subcomments
 
@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-
+  post "/createpost", to: "posts#create"
 end
