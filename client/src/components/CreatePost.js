@@ -43,9 +43,8 @@ function CreatePost({currentUser}) {
         formData.append('user_id', currentUser.id);
         for (let i = 0; i < form.pictures.files.length; i++) {
             formData.append(
-              'pictures []',
-              form.pictures.files[i],
-              form.pictures.files[i].value
+              'pictures[]',
+              form.pictures.files[i]
             )
           }
   

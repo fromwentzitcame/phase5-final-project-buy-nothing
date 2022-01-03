@@ -5,7 +5,6 @@ import styled from 'styled-components'
 function PostContainer({currentUser}) {
     const [posts, setPosts] = useState([])
     const [comments, setComments] = useState([])
-    const [users, setUsers] = useState([])
 
     useEffect(() => {
         fetch('/posts')
@@ -40,18 +39,18 @@ function PostContainer({currentUser}) {
     }
 
     function deletePost(clickedPost) {
-        let displayedPosts = [...posts]
+        let displayedPosts = posts? [...posts] : null
         const updatedPosts = displayedPosts.filter(post => post.id !== clickedPost.id)
         setPosts(updatedPosts)
     }
 
     function deleteComment(clickedComment) {
-        let displayedComments = [...comments]
+        let displayedComments = comments ? [...comments] : null
         const updatedComments = displayedComments.filter(comment => comment.id !== clickedComment.id)
         setComments(updatedComments)
     }
 
-    let revPosts = [...posts]
+    let revPosts = posts? [...posts] : null
     let feed = posts ? revPosts.reverse().map( post => <Post key={post.id} postData={post} currentUser={currentUser} comments={attachComments(post, comments)} allComments={comments} setComments={setComments} deletePost={deletePost} deleteComment={deleteComment}/> ) : null 
 
     return (

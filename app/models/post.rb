@@ -23,8 +23,8 @@ class Post < ApplicationRecord
       self.user.profile_picture_url
   end
 
-  def comments
-      self.comments
+  def datetime_created
+    self.created_at.strftime('%A, %b %d, %Y at %I:%M %p')
   end
 
 end
