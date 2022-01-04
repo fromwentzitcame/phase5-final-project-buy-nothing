@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Reply from './Reply'
+import CreateReply from './CreateReply'
 
-import { PostButton } from "../styles";
+import { PostButton } from "../styles"
 import styled from 'styled-components'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 
-function Comment({currentUser, deleteComment, commentData, commentData:{user, subcomments}}) {
+function Comment({currentUser, deleteComment, commentData, commentData:{user}, replies, setReplies, deleteReply}) {
     let navigate = useNavigate()
+    let [showReplyForm, setShowReplyForm] = useState(false)
 
-    let displayReplies = subcomments.map( reply => <Reply key={reply.id} replyData={reply} currentUser={currentUser} /> )
+    let displayReplies = replies? replies.map( reply => <Reply key={reply.id} replyData={reply} currentUser={currentUser} deleteReply={deleteReply} /> ) : null
+
+    function handleReplyFormDisplay() {
+        setShowReplyForm(showReplyForm => !showReplyForm)
+    }
 
     function handleDelete(commentData) {
         swal({
@@ -46,9 +52,10 @@ function Comment({currentUser, deleteComment, commentData, commentData:{user, su
             <p>{commentData.text}</p>
             <p>{commentData.likes} likes</p>
             <PostButton>like</PostButton>
-            <PostButton>reply</PostButton>
+            <PostButton onClick={() => handleReplyFormDisplay()}>reply</PostButton>
             {commentData.user.id === currentUser.id ? <PostButton onClick={() => handleDelete(commentData)}>delete</PostButton> : null }
             {displayReplies}
+            { showReplyForm === true? <CreateReply currentUser={currentUser} commentId={commentData.id} allReplies={replies} setReplies={setReplies} handleClick={handleReplyFormDisplay}/> : null }
         </CommentDiv>
     )
 }

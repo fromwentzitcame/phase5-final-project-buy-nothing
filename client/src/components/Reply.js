@@ -1,9 +1,38 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { PostButton } from "../styles"
 import styled from 'styled-components'
+import swal from 'sweetalert'
 
-import { PostButton } from "../styles";
+function Reply({replyData, currentUser, deleteReply}) {
+    let navigate = useNavigate()
 
-function Reply({replyData, currentUser}) {
+    function handleDelete(replyData) {
+        swal({
+            title: "caution",
+            text: "once deleted, you will not be able to recover this reply.",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    fetch(`/subcomments/${replyData.id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(data => {
+                        console.log(data)
+                    })
+                    swal("you have successfully deleted your comment.")
+                    deleteReply(replyData)
+                    navigate('/')
+                } else {
+                    swal("you did not delete your comment.")
+                }
+            })
+
+    }
+
     return (
         <ReplyDiv>
             <UserInfo>

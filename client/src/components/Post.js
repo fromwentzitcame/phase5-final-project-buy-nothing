@@ -8,15 +8,19 @@ import swal from 'sweetalert'
 import { PostButton } from "../styles";
 import { useNavigate } from 'react-router-dom'
 
-function Post({currentUser, postData, comments, allComments, setComments, deletePost, deleteComment}) {
+function Post({currentUser, postData, comments, allComments, setComments, allReplies, setReplies, deletePost, deleteComment}) {
     let navigate = useNavigate()
     const [showCommentForm, setShowCommentForm] = useState(false)
 
-    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} currentUser={currentUser} deleteComment={deleteComment}/>)
+    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} replies={attachReplies(comment, allReplies)} setReplies={setReplies} deleteReply={deleteReply} currentUser={currentUser} deleteComment={deleteComment}/>)
     let displayPictures = postData.picture_urls.map(picture => <img key={picture} src={picture} alt="broken image"></img>)
 
     function handleCommentFormDisplay() {
         setShowCommentForm(showCommentForm => !showCommentForm)
+    }
+
+    function attachReplies(commentObj, repliesArr) {
+        let postReplies = repliesArr.filter(reply => reply.comment_id === commentObj.id)
     }
 
     function handleDelete(postData) {
@@ -50,6 +54,7 @@ function Post({currentUser, postData, comments, allComments, setComments, delete
                 <IconPic src={postData.user_picture}/>
                 <p>{postData.user_name}</p>
             </UserInfo>
+            <p>Posted on {postData.datetime_created}</p>
             <p>{postData.text}</p>
             { postData.picture_urls.length > 0 ? 
                         <PicDiv>

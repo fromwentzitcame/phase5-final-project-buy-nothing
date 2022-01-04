@@ -5,6 +5,7 @@ import styled from 'styled-components'
 function PostContainer({currentUser}) {
     const [posts, setPosts] = useState([])
     const [comments, setComments] = useState([])
+    const [replies, setReplies] = useState([])
 
     useEffect(() => {
         fetch('/posts')
@@ -30,6 +31,19 @@ function PostContainer({currentUser}) {
                 setComments(data)
                 console.log(data)
             });
+
+            fetch('/subcomments')
+            .then(resp => {
+                if(resp.ok) {
+                    console.log(resp)
+                    return resp.json()         
+                } else {console.log("something went wrong")}
+            })
+            .then(data => {
+                setReplies(data)
+                console.log(data)
+            });
+
         }, []);
 
 
@@ -51,7 +65,17 @@ function PostContainer({currentUser}) {
     }
 
     let revPosts = posts? [...posts] : null
-    let feed = posts ? revPosts.reverse().map( post => <Post key={post.id} postData={post} currentUser={currentUser} comments={attachComments(post, comments)} allComments={comments} setComments={setComments} deletePost={deletePost} deleteComment={deleteComment}/> ) : null 
+    let feed = posts ? revPosts.reverse().map( post => <Post
+                                                    key={post.id}
+                                                    postData={post}
+                                                    currentUser={currentUser}
+                                                    comments={attachComments(post, comments)}
+                                                    allComments={comments}
+                                                    setComments={setComments}
+                                                    allReplies={replies}
+                                                    setReplies={setReplies}
+                                                    deletePost={deletePost}
+                                                    deleteComment={deleteComment}/> ) : null 
 
     return (
         <>

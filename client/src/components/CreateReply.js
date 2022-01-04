@@ -3,18 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 import { PostButton, Input, FormField, Label } from "../styles";
 
-function CreateComment({currentUser, postId, allComments, setComments, handleClick}) {
+function CreateReply({currentUser, commentId, handleClick, allReplies, setReplies}) {
     const navigate = useNavigate();
-    const [newCommentForm, setNewCommentForm] = useState({
+    const [newReplyForm, setNewReplyForm] = useState({
         text: '',
         user_id: currentUser.id,
-        post_id: postId
+        comment_id: commentId
     })
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([])
 
     function handleTextChange(e) {
-        setNewCommentForm({
+        setNewReplyForm({
             text: e.target.value
         })
     }
@@ -27,9 +27,9 @@ function CreateComment({currentUser, postId, allComments, setComments, handleCli
         const formData = new FormData();
         formData.append('text', form.text.value);
         formData.append('user_id', currentUser.id);
-        formData.append('post_id', postId)
+        formData.append('comment_id', commentId)
   
-        fetch("/comments", {
+        fetch("/subcomments", {
             method: "POST",
             body: formData
         })
@@ -37,9 +37,9 @@ function CreateComment({currentUser, postId, allComments, setComments, handleCli
             setIsLoading(false);
             if(response.ok) {
                 response.json()
-                .then(comment => {
-                    console.log(comment)
-                    setComments([...allComments, comment])
+                .then(reply => {
+                    console.log(reply)
+                    setReplies([...allReplies, reply])
                     handleClick()
                 });
                 navigate('/')
@@ -53,11 +53,13 @@ function CreateComment({currentUser, postId, allComments, setComments, handleCli
         });
     }
 
+
+
     return (
         <div>
             <form className="form" onSubmit={handleSubmit}>
                 <FormField>
-                    <Label htmlFor="text">comment</Label>
+                    <Label htmlFor="text">reply</Label>
                     <textarea
                     name="text"
                     id="text"
@@ -71,8 +73,8 @@ function CreateComment({currentUser, postId, allComments, setComments, handleCli
                     </PostButton>
                 </FormField>
             </form>
-       </div>
+        </div>
     )
 }
 
-export default CreateComment
+export default CreateReply
