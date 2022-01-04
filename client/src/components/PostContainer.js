@@ -11,38 +11,32 @@ function PostContainer({currentUser}) {
         fetch('/posts')
             .then(resp => {
                 if(resp.ok) {
-                    console.log(resp)
-                    return resp.json()         
+                    resp.json()         
+                    .then(data => {
+                        console.log(data)
+                        setPosts(data)
+                    })
                 } else {console.log("something went wrong")}
             })
-            .then(data => {
-                setPosts(data)
-                console.log(data)
-            });
+            ;
 
             fetch('/comments')
             .then(resp => {
                 if(resp.ok) {
-                    console.log(resp)
-                    return resp.json()         
+                    resp.json()
+                    .then(data => setComments(data))         
                 } else {console.log("something went wrong")}
             })
-            .then(data => {
-                setComments(data)
-                console.log(data)
-            });
+            ;
 
             fetch('/subcomments')
             .then(resp => {
                 if(resp.ok) {
-                    console.log(resp)
-                    return resp.json()         
+                    resp.json()
+                    .then(data => setReplies(data))         
                 } else {console.log("something went wrong")}
             })
-            .then(data => {
-                setReplies(data)
-                console.log(data)
-            });
+            ;
 
         }, []);
 
@@ -64,6 +58,12 @@ function PostContainer({currentUser}) {
         setComments(updatedComments)
     }
 
+    function deleteReply(clickedReply) {
+        let displayedReplies = replies ? [...replies] : null
+        const updatedReplies = displayedReplies.filter(reply => reply.id !== clickedReply.id)
+        setReplies(updatedReplies)
+    }
+
     let revPosts = posts? [...posts] : null
     let feed = posts ? revPosts.reverse().map( post => <Post
                                                     key={post.id}
@@ -75,7 +75,8 @@ function PostContainer({currentUser}) {
                                                     allReplies={replies}
                                                     setReplies={setReplies}
                                                     deletePost={deletePost}
-                                                    deleteComment={deleteComment}/> ) : null 
+                                                    deleteComment={deleteComment}
+                                                    deleteReply={deleteReply}/> ) : null 
 
     return (
         <>

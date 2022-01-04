@@ -47,8 +47,9 @@ function Comment({currentUser, deleteComment, commentData, commentData:{user}, r
         <CommentDiv>
             <UserInfo>
                 <IconPic src={user.profile_picture_url}></IconPic>
-                <span>{user.full_name}</span>
+                <span>{user.full_name}, {user.neighborhood_name}</span>
             </UserInfo>
+            <p>{commentData.datetime_created}</p>
             <p>{commentData.text}</p>
             <p>{ commentData.likes > 0 ? `${commentData.likes} likes` : null }</p>
             <PostButton>like</PostButton>

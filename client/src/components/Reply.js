@@ -23,11 +23,11 @@ function Reply({replyData, currentUser, deleteReply}) {
                     .then(data => {
                         console.log(data)
                     })
-                    swal("you have successfully deleted your comment.")
+                    swal("you have successfully deleted your reply.")
                     deleteReply(replyData)
                     navigate('/')
                 } else {
-                    swal("you did not delete your comment.")
+                    swal("you did not delete your reply.")
                 }
             })
 
@@ -37,12 +37,13 @@ function Reply({replyData, currentUser, deleteReply}) {
         <ReplyDiv>
             <UserInfo>
                 <IconPic src={replyData.user_picture}></IconPic>
-                <span>{replyData.user_name}</span>
+                <span>{replyData.user_name}, {replyData.user_neighborhood}</span>
             </UserInfo>
+            <p>{replyData.datetime_created}</p>
             <p>{replyData.text}</p>
             <p>{ replyData.likes > 0 ? `${replyData.likes} likes` : null }</p>
             <PostButton>like</PostButton>
-            {replyData.user_id === currentUser.id ? <PostButton>delete</PostButton> : null }
+            {replyData.user_id === currentUser.id ? <PostButton onClick={() => handleDelete(replyData)}>delete</PostButton> : null }
         </ReplyDiv>
     )
 }

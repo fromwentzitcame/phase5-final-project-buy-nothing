@@ -8,11 +8,11 @@ import swal from 'sweetalert'
 import { PostButton } from "../styles";
 import { useNavigate } from 'react-router-dom'
 
-function Post({currentUser, postData, comments, allComments, setComments, allReplies, setReplies, deletePost, deleteComment}) {
+function Post({currentUser, postData, comments, allComments, setComments, allReplies, setReplies, deletePost, deleteComment, deleteReply}) {
     let navigate = useNavigate()
     const [showCommentForm, setShowCommentForm] = useState(false)
 
-    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} replies={attachReplies(comment, allReplies)} setReplies={setReplies} currentUser={currentUser} deleteComment={deleteComment}/>)
+    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} replies={attachReplies(comment, allReplies)} setReplies={setReplies} currentUser={currentUser} deleteComment={deleteComment} deleteReply={deleteReply}/>)
     let displayPictures = postData.picture_urls.map(picture => <img key={picture} src={picture} alt="broken image"></img>)
 
     function handleCommentFormDisplay() {
@@ -53,7 +53,7 @@ function Post({currentUser, postData, comments, allComments, setComments, allRep
             <h3>{postData.category_type}</h3>
             <UserInfo>
                 <IconPic src={postData.user_picture}/>
-                <p>{postData.user_name}</p>
+                <p>{postData.user_name}, {postData.user_neighborhood}</p>
             </UserInfo>
             <p>Posted on {postData.datetime_created}</p>
             <p>{postData.text}</p>
@@ -126,6 +126,5 @@ const PicDiv = styled.div`
 const UserInfo = styled.div`
     display: flex;
     align-items: center;
-    /* margin: 10px; */
     padding: 5px;
 `

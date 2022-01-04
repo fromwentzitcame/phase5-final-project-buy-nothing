@@ -9,7 +9,7 @@ function HomePage({user}) {
     return (
         <div id="homepage">
             <PostFeed>
-                <h2>Community Posts</h2>
+                <h2>community posts</h2>
                 <PostContainer currentUser={user}/>
             </PostFeed>
         </div>

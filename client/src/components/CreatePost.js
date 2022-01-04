@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Input, FormField, Label, UsernameField } from "../styles";
+import styled from 'styled-components';
 
 function CreatePost({currentUser}) {
     const navigate = useNavigate();
@@ -69,9 +70,10 @@ function CreatePost({currentUser}) {
     }
 
     return (
-<div>
+<NewPostDiv>
+    <h2>create post</h2>
             <form className="form" onSubmit={handleSubmit}>
-            <UsernameField>
+            <FormField>
                 <Label htmlFor="text">text</Label>
                 <textarea
                 type="textarea"
@@ -80,7 +82,7 @@ function CreatePost({currentUser}) {
                 autoComplete="off"
                 onChange={handleTextChange}
                 />
-            </UsernameField>
+            </FormField>
             <FormField>
                 <Label htmlFor="category_id">category</Label>
                 <select
@@ -110,8 +112,15 @@ function CreatePost({currentUser}) {
                 </Button>
             </FormField>
         </form>
-       </div>
+       </NewPostDiv>
     )
 }
 
 export default CreatePost
+
+const NewPostDiv = styled.div`
+    padding-top: 70px;
+    padding-left: 160px;
+    padding-right: 30px;
+
+`
