@@ -50,7 +50,7 @@ function Comment({currentUser, deleteComment, commentData, commentData:{user}, r
                 <span>{user.full_name}</span>
             </UserInfo>
             <p>{commentData.text}</p>
-            <p>{commentData.likes} likes</p>
+            <p>{ commentData.likes > 0 ? `${commentData.likes} likes` : null }</p>
             <PostButton>like</PostButton>
             <PostButton onClick={() => handleReplyFormDisplay()}>reply</PostButton>
             {commentData.user.id === currentUser.id ? <PostButton onClick={() => handleDelete(commentData)}>delete</PostButton> : null }

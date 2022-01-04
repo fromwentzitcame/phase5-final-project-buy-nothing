@@ -12,7 +12,7 @@ function Post({currentUser, postData, comments, allComments, setComments, allRep
     let navigate = useNavigate()
     const [showCommentForm, setShowCommentForm] = useState(false)
 
-    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} replies={attachReplies(comment, allReplies)} setReplies={setReplies} deleteReply={deleteReply} currentUser={currentUser} deleteComment={deleteComment}/>)
+    let displayComments = comments.map(comment => <Comment key={comment.id} commentData={comment} replies={attachReplies(comment, allReplies)} setReplies={setReplies} currentUser={currentUser} deleteComment={deleteComment}/>)
     let displayPictures = postData.picture_urls.map(picture => <img key={picture} src={picture} alt="broken image"></img>)
 
     function handleCommentFormDisplay() {
@@ -21,6 +21,7 @@ function Post({currentUser, postData, comments, allComments, setComments, allRep
 
     function attachReplies(commentObj, repliesArr) {
         let postReplies = repliesArr.filter(reply => reply.comment_id === commentObj.id)
+        return postReplies
     }
 
     function handleDelete(postData) {
@@ -62,12 +63,12 @@ function Post({currentUser, postData, comments, allComments, setComments, allRep
                     </PicDiv> : null
             }
             <div>
-                <p>{postData.likes} likes</p>
+                <p>{ postData.likes > 0 ? `${postData.likes} likes` : null }</p>
                 <PostButton>like</PostButton>
                 <PostButton onClick={() => handleCommentFormDisplay()}>comment</PostButton>
                 {postData.user_id === currentUser.id ? <PostButton onClick={() => handleDelete(postData)}>delete</PostButton> : null }
                 { showCommentForm === true ? <CreateComment currentUser={currentUser} setComments={setComments} allComments={allComments} postId={postData.id} handleClick={handleCommentFormDisplay}/> : null }
-                <p>comments</p>
+                <p> {comments.length > 0? 'comments' : null}</p>
                 {displayComments}
             </div>
         </PostCard>

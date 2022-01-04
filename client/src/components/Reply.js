@@ -40,7 +40,7 @@ function Reply({replyData, currentUser, deleteReply}) {
                 <span>{replyData.user_name}</span>
             </UserInfo>
             <p>{replyData.text}</p>
-            <p>{replyData.likes} likes</p>
+            <p>{ replyData.likes > 0 ? `${replyData.likes} likes` : null }</p>
             <PostButton>like</PostButton>
             {replyData.user_id === currentUser.id ? <PostButton>delete</PostButton> : null }
         </ReplyDiv>
