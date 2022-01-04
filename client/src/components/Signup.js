@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Input, FormField, Label, UsernameField } from "../styles";
+import swal from 'sweetalert';
 
 function Signup({onLogin}) {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ function Signup({onLogin}) {
         last_name: '',
         email: '',
         password: '',
-        zip_code: '',
+        neighborhood_id: '',
         profile_picture: null
     })
     const [isLoading, setIsLoading] = useState(false);
@@ -38,9 +39,15 @@ function Signup({onLogin}) {
         formData.append('last_name', form.last_name.value);
         formData.append('email', form.email.value);
         formData.append('password', form.password.value);
-        formData.append('zip_code', form.zip_code.value);
-        formData.append('profile_picture', form.profile_picture.files[0], form.profile_picture.value);
-  
+        formData.append('neighborhood_id', form.neighborhood_id.value);
+        // formData.append('profile_picture', form.profile_picture.files[0], form.profile_picture.value);
+        for (let i = 0; i < form.profile_picture.files.length; i++) {
+            formData.append(
+              'profile_picture',
+              form.profile_picture.files[i]
+            )
+          }
+
         fetch("/signup", {
             method: "POST",
             body: formData,
@@ -53,7 +60,15 @@ function Signup({onLogin}) {
                 navigate('/')
             } else {
                 response.json()
-                .then(error => setErrors(error.errors))
+                .then(error => {
+                    setErrors(error.errors)
+                    console.log(error)
+                    swal(`first name: ${error.first_name ? error.first_name : 'valid'}
+                        \n last name: ${error.last_name ? error.last_name : 'valid'}
+                        \n email: ${error.email ? error.email : 'valid'}
+                        \n password: ${error.password ? error.password : 'valid'}
+                        \n profile_picture: ${error.profile_picture ? error.profile_picture : 'valid'}`)
+                })
             }
         });
     }
@@ -90,15 +105,6 @@ function Signup({onLogin}) {
                 />
             </FormField>
             <FormField>
-                <Label htmlFor="zip_code">zip code</Label>
-                <Input
-                type="number"
-                name="zip_code"
-                id="zip_code"
-                onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
                 <Label htmlFor="password">password</Label>
                 <Input
                 type="password"
@@ -107,6 +113,25 @@ function Signup({onLogin}) {
                 autoComplete="current-password"
                 onChange={handleChange}
                 />
+            </FormField>
+            <FormField>
+                <Label htmlFor="neighborhood_id">closest neighborhood</Label>
+                <select
+                name="neighborhood_id"
+                id="neighborhood_id"
+                onChange={handleChange}
+                >
+                    <option value="1">Belknap Lookout</option>
+                    <option value="2">East Hills</option>
+                    <option value="3">Eastown</option>
+                    <option value="4">Fulton Heights</option>
+                    <option value="5">Heartside</option>
+                    <option value="6">Heritage Hill</option>
+                    <option value="7">Highland Park</option>
+                    <option value="8">John Ball</option>
+                    <option value="9">Midtown</option>
+                    <option value="10">Roosevelt Park</option>
+                </select>
             </FormField>
             <FormField>
                 <Label htmlFor="profile_picture">profile picture</Label>

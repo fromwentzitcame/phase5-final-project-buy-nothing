@@ -25,11 +25,11 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     @user.to_json(include: [:profile_picture])
-    if user.valid?
+    if @user.valid?
       session[:user_id] = @user.id
       render json: UserSerializer.new(@user).serializable_hash[:data][:attributes], status: :created
     else
-      render json: user.errors.full_messages, status: :unprocessable_entity
+      render json: @user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -55,6 +55,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:first_name, :last_name, :email, :password, :neighborhood, :profile_picture)
+      params.permit(:first_name, :last_name, :email, :password, :neighborhood_id, :profile_picture)
     end
 end

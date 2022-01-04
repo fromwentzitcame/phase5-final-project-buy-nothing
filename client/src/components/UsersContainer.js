@@ -6,7 +6,7 @@ import styled from 'styled-components'
 function UsersContainer({currentUser, allUsers}) {
 
     let usersArr = allUsers ? [...allUsers] : null
-    let displayUsers = allUsers ? usersArr.filter( user => user.id !== currentUser.id ).map( user => <UserCard key={user.id} userData={user} />) : null
+    let displayUsers = allUsers ? usersArr.filter( user => user.id !== currentUser.id ).map( user => <UserCard key={user.id} userData={user} />) : `something is wrong :(`
 
     return (
         <UserCardContainer>
