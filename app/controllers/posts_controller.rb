@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :set_post, only: [:show, :update, :destroy]
+    before_action :set_post, only: [:show, :update, :destroy, :add_like, :remove_like]
     # skip_before_action :authorize
 
     # GET /posts
@@ -33,6 +33,16 @@ class PostsController < ApplicationController
     def destroy
       @post.destroy
       head :no_content
+    end
+
+    def add_like
+      @post.increase_likes
+      render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
+    end
+
+    def remove_like
+      @post.unlike
+      render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
     end
   
     private

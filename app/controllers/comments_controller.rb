@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: [:show, :update, :destroy, :add_like, :remove_like]
 
   # GET /comments
   def index
@@ -34,6 +34,16 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     head :no_content
+  end
+
+  def add_like
+    @comment.increase_likes
+    render json: @comment
+  end
+
+  def remove_like
+    @comment.unlike
+    render json: @comment
   end
 
   private

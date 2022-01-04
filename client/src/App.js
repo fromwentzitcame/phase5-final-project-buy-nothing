@@ -34,7 +34,7 @@ function App() {
       if (resp.ok) {
         resp.json()
         .then(data => {
-          console.log(data)
+          // console.log(data)
           setAllUsers(data);
         });
       } else {console.log("something went wrong")}

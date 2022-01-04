@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PostButton } from "../styles"
 import styled from 'styled-components'
 import swal from 'sweetalert'
 
-function Reply({replyData, currentUser, deleteReply}) {
+function Reply({replyData, currentUser, setReplies, allReplies, deleteReply}) {
     let navigate = useNavigate()
+    const [toggleLike, setToggleLike] = useState(false)
+
+
+    function handleToggleLike() {
+        setToggleLike(toggleLike => !toggleLike)
+    }
+
+    function likeRender(updatedReply) {
+        let updatedReplies = [...allReplies]
+        updatedReplies.splice(allReplies.indexOf(replyData), 1, updatedReply)
+        setReplies(updatedReplies)
+        navigate('/')
+    }
 
     function handleDelete(replyData) {
         swal({
@@ -30,7 +43,54 @@ function Reply({replyData, currentUser, deleteReply}) {
                     swal("you did not delete your reply.")
                 }
             })
+    }
 
+
+    function likeReply() {
+        fetch(`/subcomments/${replyData.id}/like`, {
+            method: 'PATCH',
+            heaers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                likes: replyData.likes
+            })
+        })
+            .then(resp => {
+                if (resp.ok) {
+                    resp.json() 
+                    .then(data => {
+                        console.log(data)
+                        handleToggleLike()
+                        likeRender(data)
+                    })
+                } else {
+                    resp.json()
+                    .then(error => console.log(error))
+                }
+            })
+    }
+
+    function unlikeReply() {
+        fetch(`/subcomments/${replyData.id}/unlike`, {
+            method: 'PATCH',
+            heaers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                likes: replyData.likes
+            })
+        })
+        .then(resp => {
+            if (resp.ok) {
+                resp.json() 
+                .then(data => {
+                    console.log(data)
+                    handleToggleLike()
+                    likeRender(data)
+                })
+            } else {console.log("something went wrong")}
+            })
     }
 
     return (
@@ -42,7 +102,7 @@ function Reply({replyData, currentUser, deleteReply}) {
             <p>{replyData.datetime_created}</p>
             <p>{replyData.text}</p>
             <p>{ replyData.likes > 0 ? `${replyData.likes} likes` : null }</p>
-            <PostButton>like</PostButton>
+            { toggleLike === false? <PostButton onClick={() => likeReply()}>like</PostButton> : <PostButton onClick={() => unlikeReply()}>unlike</PostButton>}
             {replyData.user_id === currentUser.id ? <PostButton onClick={() => handleDelete(replyData)}>delete</PostButton> : null }
         </ReplyDiv>
     )

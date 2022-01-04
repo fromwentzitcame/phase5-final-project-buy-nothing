@@ -1,5 +1,5 @@
 class SubcommentsController < ApplicationController
-  before_action :set_subcomment, only: [:show, :update, :destroy]
+  before_action :set_subcomment, only: [:show, :update, :destroy, :add_like, :remove_like]
 
   # GET /subcomments
   def index
@@ -37,6 +37,16 @@ class SubcommentsController < ApplicationController
   def destroy
     @subcomment.destroy
     head :no_content
+  end
+
+  def add_like
+    @subcomment.increase_likes
+    render json: @subcomment
+  end
+
+  def remove_like
+    @subcomment.unlike
+    render json: @subcomment
   end
 
   private

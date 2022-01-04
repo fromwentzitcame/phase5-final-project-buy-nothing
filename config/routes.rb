@@ -16,4 +16,14 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   post "/createpost", to: "posts#create"
+
+  patch "/posts/:id/like", to: "posts#add_like"
+  patch "/posts/:id/unlike", to: "posts#remove_like"
+
+  patch "/comments/:id/like", to: "comments#add_like"
+  patch "/comments/:id/unlike", to: "comments#remove_like"
+
+  patch "/subcomments/:id/like", to: "subcomments#add_like"
+  patch "/subcomments/:id/unlike", to: "subcomments#remove_like"
+
 end

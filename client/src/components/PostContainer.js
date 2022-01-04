@@ -13,7 +13,7 @@ function PostContainer({currentUser}) {
                 if(resp.ok) {
                     resp.json()         
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         setPosts(data)
                     })
                 } else {console.log("something went wrong")}
@@ -67,9 +67,12 @@ function PostContainer({currentUser}) {
     let revPosts = posts? [...posts] : null
     let feed = posts ? revPosts.reverse().map( post => <Post
                                                     key={post.id}
+
                                                     postData={post}
                                                     currentUser={currentUser}
                                                     comments={attachComments(post, comments)}
+                                                    allPosts={posts}
+                                                    setPosts={setPosts}
                                                     allComments={comments}
                                                     setComments={setComments}
                                                     allReplies={replies}

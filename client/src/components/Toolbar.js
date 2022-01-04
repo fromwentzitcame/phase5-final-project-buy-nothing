@@ -15,9 +15,9 @@ function Toolbar() {
                <NavLink className='links' to='/neighbors'>
                    <span>neighbors</span>
                </NavLink>
-               <NavLink className='links' to='/profile'>
+               {/* <NavLink className='links' to='/profile'>
                    <span>profile</span>
-               </NavLink>
+               </NavLink> */}
                <NavLink className='links' to='/resources'>
                    <span>resources</span>
                </NavLink>
