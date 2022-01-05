@@ -18,8 +18,8 @@ const UserDiv = styled.div`
     border-radius: 8px; 
     padding: 10px;
     margin: 10px;
+    margin-right: 30px;
     min-width: 300px;
-    max-width: 600px;
     min-height: 80px;
     display: flex;
     align-items: center;
@@ -31,6 +31,7 @@ const IconPic = styled.img`
     width: 60px;
     object-fit: cover;
     border-radius: 50px;
-    margin-right: 15px;
+    margin-right: 25px;
+    margin-left: 10px;
     position: relative;
 `

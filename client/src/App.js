@@ -32,9 +32,9 @@ function App() {
     fetch('/users')
     .then(resp => {
       if (resp.ok) {
-        resp.json()
+        return resp.json()
         .then(data => {
-          // console.log(data)
+          // console.log(data);
           setAllUsers(data);
         });
       } else {console.log("something went wrong")}

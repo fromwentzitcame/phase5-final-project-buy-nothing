@@ -29,7 +29,7 @@ function Post({currentUser, postData, allPosts, setPosts, comments, allComments,
     function handleCommentFormDisplay() {
         setShowCommentForm(showCommentForm => !showCommentForm)
     }
-    
+
     function handleToggleLike() {
         setToggleLike(toggleLike => !toggleLike)
     }
@@ -117,7 +117,9 @@ function Post({currentUser, postData, allPosts, setPosts, comments, allComments,
 
     return (
         <PostCard>
-            <h3>{postData.category_type}</h3>
+            <CategoryType>
+                <h3>{postData.category_type}</h3>
+            </CategoryType>
             <UserInfo>
                 <IconPic src={postData.user_picture}/>
                 <p>{postData.user_name}, {postData.user_neighborhood}</p>
@@ -151,6 +153,12 @@ const PostCard = styled.div`
     margin: 10px;
     width: 500px;
     min-height: 200px;
+`
+
+const CategoryType = styled.div`
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
 `
 
 const IconPic = styled.img`

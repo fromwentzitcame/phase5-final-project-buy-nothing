@@ -22,7 +22,10 @@ function Header({setLoggedIn, user}) {
     return (
         <Nav>
             <NavLink className='links' to='/'>
-                <span>buy nothing grand rapids</span>
+                <Title>
+                    <HeaderIcon src="images/community.png" alt="community"></HeaderIcon>
+                    <span>buy nothing grand rapids</span>
+                </Title>
             </NavLink>
             <UserCenter>
                 <Welcome>{user ? `hello, ${user.first_name.toLowerCase()}!` : null }</Welcome>
@@ -57,6 +60,17 @@ const Nav = styled.nav`
         text-decoration: none;
     }
 `;
+
+const Title = styled.div`
+    align-items: center;
+    display: flex;
+`
+
+const HeaderIcon = styled.img`
+    height: 35px;
+    width: auto;
+    padding-right: 5px;
+`
 
 const UserCenter = styled.div`
     display: flex;
